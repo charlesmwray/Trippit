@@ -1,9 +1,11 @@
 import React, { Component } from 'react';
 import './App.css';
+import Moment from 'moment';
 
 import Grid from './Components/Grid';
 import Details from './Components/Details';
 import Filter from './Components/Filter';
+import Reminder from './Components/Reminder';
 
 import dbResponse from './data/dbResponse';
 import setDb from './data/setDb';
@@ -28,15 +30,25 @@ class App extends Component {
         });
     }
     componentDidMount() {
-        // const reminderTimes = this.state.db.filter( (trip) => {
-        //     return trip.reminder
-        // });
-        // const checkForReminder = () => {
-        //     var date = new Date('yyyy/');
-        // }
-        // setInterval(checkForReminder, 1000);
+        const reminderTimes = this.state.db.filter( (trip) => {
+            return  trip.reminder
+        });
+
+        const checkForReminder = () => {
+            reminderTimes.forEach( (trip) => {
+                if ( !this.state.reminder && Moment( trip.reminder ).isSame( Moment(), 'minute') ) {
+                    this.setState({
+                        reminder: { title: trip.title, date: trip.startDate, id: trip.id }
+                    });
+                }
+            })
+        }
+
+        setInterval(checkForReminder, 1000);
     }
     resetData() {
+        // For development only. Click on header to
+        // reset data to initial service call.
         localStorage.setItem('trips', null);
         window.location.reload();
     }
@@ -172,16 +184,29 @@ class App extends Component {
         var db = this.state.db;
         for(var i = 0 ; i < db.length; i++){
             if(db[i].hasOwnProperty("id") && db[i].id === id) {
-                const time = e.target.CreateReminderTimepicker.value.split(':');
-                const date = e.target.CreateReminderInputDatepicker.value.split('/');
-                const reminderDateTime = new Date( date[2], date[0], date[1], time[0], time[1].slice(0,2), 0);
+                const time = e.target.CreateReminderTimepicker.value;
+                const date = e.target.CreateReminderInputDatepicker.value;
 
-                db[i].reminder = reminderDateTime;
+                db[i].reminder = Moment( date + ' ' + time);
             }
         }
         setDb(db);
         this.setState({
             db:db
+        });
+    }
+    closeReminder() {
+        var db = this.state.db;
+        for(var i = 0 ; i < db.length; i++){
+            if(db[i].hasOwnProperty("id") && db[i].id === this.state.reminder.id) {
+                db[i].reminder = false;
+            }
+        }
+        setDb(db);
+        this.setState({
+            db:db,
+            isReminderActive: false,
+            reminder: null,
         });
     }
     search(term) {
@@ -229,7 +254,13 @@ class App extends Component {
             <div className="container">
                 <div className="row">
                     <div className="col-xs-12">
-                        <h1 className="site-title">Trippit</h1>
+                        <h1 className="site-title" onClick={ this.resetData }>Trippit</h1>
+                        { this.state.reminder &&
+                            <Reminder
+                                data={ this.state.reminder }
+                                close={ this.closeReminder.bind(this) }
+                            />
+                        }
                     </div>
                 </div>
                 <div className="row">

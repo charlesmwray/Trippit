@@ -1,5 +1,5 @@
-.wrapper {
-    margin: 1rem;
+.container {
+    margin: 1rem auto 3rem auto;
 }
 .btn + .btn {
     margin-left: 1rem;
@@ -70,7 +70,7 @@
 .todo-list {
     padding: 0;
     margin: 0;
-    height: 100px;
+    height: 90px;
     overflow: scroll;
     list-style-type: none;
     border: 1px solid lightsteelblue;

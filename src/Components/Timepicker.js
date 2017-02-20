@@ -11,7 +11,7 @@ class Timepicker extends Component {
         }
     }
     componentDidMount() {
-        $('#' + this.makeId() ).timepicker({});
+        $('#' + this.makeId() ).timepicker({ minuteStep: 1 });
     }
     makeId() {
         return this.state.props.id + 'Timepicker';
