@@ -1,24 +1,66 @@
-.App {
-  text-align: center;
+.wrapper {
+    margin: 1rem;
+}
+.btn + .btn {
+    margin-left: 1rem;
+}
+.btn.first {
+    margin-left: 1rem;
 }
 
-.App-logo {
-  animation: App-logo-spin infinite 20s linear;
-  height: 80px;
+.site-title {
+    margin-top: 0;
+    color: darkslategrey;
 }
 
-.App-header {
-  background-color: #222;
-  height: 150px;
-  padding: 20px;
-  color: white;
+.filter-container {
+    display: flex;
+    align-items: stretch;
+    border: 1px solid lightsteelblue;
+    border-radius: 4px;
+}
+.filter-container .filter-item {
+    padding: 1rem;
+    flex-grow: 1;
 }
 
-.App-intro {
-  font-size: large;
+.filter-container .filter-item .search {
+    display: inline-block;
+    width: initial;
 }
 
-@keyframes App-logo-spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+.grid-item {
+    padding: 0;
+    border-color: lightsteelblue;
+}
+
+.grid-item .link {
+    display: block;
+    padding: 1rem;
+    text-decoration: none;
+}
+.grid-item .link:hover,
+.grid-item .link:active {
+    background-color: beige;
+}
+
+.grid-item .label {
+    text-align: left;
+    display: inline-block;
+    color: black;
+}
+
+.grid-item h3 {
+    margin-top: 0;
+    color: lightcoral;
+}
+
+
+.details-wrapper {
+    display: flex;
+    flex-direction: column;
+    padding: 1rem;
+}
+.details-section {
+    margin: 1rem 0;
 }

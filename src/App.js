@@ -222,7 +222,12 @@ class App extends Component {
     }
     render() {
         return (
-            <div className="wrapper">
+            <div className="container">
+                <div className="row">
+                    <div className="col-xs-12">
+                        <h1 className="site-title">Trippit</h1>
+                    </div>
+                </div>
                 <div className="row">
                     <div className="col-xs-12">
                         <Filter
@@ -235,13 +240,13 @@ class App extends Component {
                     </div>
                 </div>
                 <div className="row">
-                    <div className="col-xs-12 col-sm-8">
+                    <div className="col-xs-12 col-sm-4">
                         <Grid
                             data={ this.state.searchedDb || this.state.db }
                             showDetails={ this.showDetails.bind(this) }
                         />
                     </div>
-                    <div className="col-xs-12 col-sm-4">
+                    <div className="col-xs-12 col-sm-8 details-container">
                         { this.state.selectedTrip &&
                             <Details
                                 trip={ this.state.selectedTrip }
@@ -255,7 +260,7 @@ class App extends Component {
                                 createReminder={ this.createReminder.bind(this) }
                             />
                         }
-                        { !this.state.selectedTrip && <div>None selected.</div> }
+                        { !this.state.selectedTrip && <h2>&#8678; Select a trip</h2> }
                     </div>
                 </div>
             </div>

@@ -4,7 +4,7 @@ const Grid = (props) => {
     const showDetails = (id) => {
         props.showDetails(id);
     }
-    const tableBody = props.data.map( (trip, i) => {
+    const items = props.data.map( (trip, i) => {
         const getDuration = () => {
             const startDate = trip.startDate;
             const endDate = trip.endDate;
@@ -21,32 +21,25 @@ const Grid = (props) => {
             return <span>{complete} / {trip.todos.length}</span>
         }
         return (
-            <tr key={i} onClick={(e) => { showDetails(trip.id) }}>
-                <td>{trip.title}</td>
-                <td>{trip.destination}</td>
-                <td>{getDuration()}</td>
-                <td>{trip.category}</td>
-                <td>{getItemsStatus()}</td>
-                <td>{trip.planningState} </td>
-            </tr>
+            <li className="list-group-item grid-item" key={i}>
+                <a className="link" href="#" onClick={(e) => { showDetails(trip.id) }}>
+                    <h3>{trip.title}</h3>
+                    <div><span className="label">Destination</span>{trip.destination}</div>
+                    <div><span className="label">Duration</span>{getDuration()}</div>
+                    <div><span className="label">Category</span>{trip.category}</div>
+                    <div><span className="label">Items Needed/Complete</span>{getItemsStatus()}</div>
+                    <div><span className="label">Status</span>{trip.planningState} </div>
+                </a>
+            </li>
         )
     });
     return (
-        <table className="table">
-            <thead>
-                <tr>
-                    <th>Title</th>
-                    <th>Destination</th>
-                    <th>Duration</th>
-                    <th>Category</th>
-                    <th>Items needed/complete</th>
-                    <th>Planning State</th>
-                </tr>
-            </thead>
-            <tbody>
-                {tableBody}
-            </tbody>
-        </table>
+        <div className="grid-container">
+            <h2>Trips</h2>
+            <ul className="list-group">
+                {items}
+            </ul>
+        </div>
     )
 }
 

@@ -93,13 +93,17 @@ const Details = (props) => {
     const detail = (detail, label, props, inputType) => {
         const parseInputType = () => {
             if ( inputType === 'textarea' ) {
-                return <textarea id={ label } defaultValue={ detail }  key={ props.trip.id }></textarea>
+                return <textarea
+                        id={ label }
+                        className="form-control"
+                        defaultValue={ detail }
+                        key={ props.trip.id }></textarea>
             } else {
-                return <input id={ label } defaultValue={ detail }  key={ props.trip.id } />
+                return <input id={ label } className="form-control" defaultValue={ detail }  key={ props.trip.id } />
             }
         }
         return (
-            <div className="row">
+            <div className="row form-group">
                 <div className="col-sm-5 detail-title">
                     <label htmlFor={ label }>{ label }</label>
                 </div>
@@ -113,50 +117,50 @@ const Details = (props) => {
 
     }
     return (
-        <div className="details-wrapper">
-            <form onSubmit={(e) => saveTrip(e)}>
-                { detail(props.trip.title, 'Title', props) }
-                { detail(props.trip.destination, 'City', props) }
-                { detail(props.trip.description, 'Description', props, 'textarea' ) }
-                <div className="row">
-                    <div className="col-sm-5 detail-title">
-                        <label htmlFor="description">Description</label>
+        <div>
+            <h2>Details</h2>
+            <form className="details-wrapper" onSubmit={(e) => saveTrip(e)}>
+                <div className="details-section">
+                    { detail(props.trip.title, 'Title', props) }
+                    { detail(props.trip.destination, 'City', props) }
+                    { detail(props.trip.description, 'Description', props, 'textarea' ) }
+                    <div className="row form-group">
+                        <div className="col-sm-5 detail-title">
+                            <label htmlFor="category">Category</label>
+                        </div>
+                        <div className="col-sm-7">
+                            <select className="form-control" key={ props.trip.id } id="category" defaultValue={ props.trip.category }>
+                                { options }
+                            </select>
+                        </div>
                     </div>
-                    <div className="col-sm-7">
-                    </div>
-                </div>
-                <div className="row">
-                    <div className="col-sm-5 detail-title">
-                        <label htmlFor="category">Category</label>
-                    </div>
-                    <div className="col-sm-7">
-                        <select key={ props.trip.id } id="category" defaultValue={ props.trip.category }>
-                            { options }
-                        </select>
-                    </div>
-                </div>
-                <Datepicker id="start" label="Start Date" handleDateChange={ handleDateChange.bind(this) } />
-                <Datepicker id="end" label="End Date" startDate={ props.trip.startDate } />
-                <div className="row">
-                    <div className="col-xs-12">
-                        <div>Items Needed <button className="btn pull-right" onClick={ (e) => addTodo(props.trip.id, e) }>+</button></div>
-                        <ul>
-                            { todos }
-                        </ul>
+                    <Datepicker id="start" label="Start Date" handleDateChange={ handleDateChange.bind(this) } />
+                    <Datepicker id="end" label="End Date" startDate={ props.trip.startDate } />
+                    <div className="row">
+                        <div className="col-xs-12">
+                            <div>Items Needed <button className="btn first" onClick={ (e) => addTodo(props.trip.id, e) }>+</button></div>
+                            <ul>
+                                { todos }
+                            </ul>
+                        </div>
                     </div>
                 </div>
-                <button
-                    type="button"
-                    className="btn"
-                    data-toggle="modal"
-                    data-target="#CreateReminder">Create Reminder</button>
-                <div className="button-bar">
-                    <button className="btn" type="submit">Save</button>
-                    <button className="btn" onClick={ props.cancelNewTrip }>Cancel</button>
+                <div className="details-section">
+                    <button
+                        type="button"
+                        className="btn"
+                        data-toggle="modal"
+                        data-target="#CreateReminder">
+                        Create Reminder
+                    </button>
+                </div>
+                <div className="button-section">
                     {
                         !props.trip.new &&
-                        <button className="btn" onClick={ (e) => deleteTrip(e, props.trip.id) }>Delete</button>
+                        <button className="btn btn-danger" onClick={ (e) => deleteTrip(e, props.trip.id) }>Delete</button>
                     }
+                    <button className="btn btn-primary pull-right" type="submit">Save</button>
+                    <button className="btn btn-default pull-right" onClick={ props.cancelNewTrip }>Cancel</button>
                 </div>
             </form>
             <CreateReminder title={props.trip.title} create={props.createReminder} id={props.trip.id} />

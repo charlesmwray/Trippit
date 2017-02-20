@@ -33,10 +33,10 @@ class Datepicker extends Component {
     }
     render() {
         return (
-            <div className="row">
+            <div className="row form-group">
                 <div className="col-sm-12">
                     <label>{ this.state.label }</label>
-                    <div id={ this.getDatepickerId() } className="col-sm-7 input-group date" data-date-format="mm/dd/yyyy">
+                    <div id={ this.getDatepickerId() } className="input-group date" data-date-format="mm/dd/yyyy">
                         <input
                             id={ this.getInputDatepickerId() }
                             className="form-control"
