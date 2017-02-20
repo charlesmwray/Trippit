@@ -8,18 +8,16 @@ class Datepicker extends Component {
         this.state = {
             id: props.id,
             label: props.label,
-            startDate: props.startDate || null
+            startDate: props.startDate || null,
+            initialDate: props.initialDate || this.getFormattedDate()
         }
     }
     componentDidMount() {
-        const today = this.getFormattedDate();
-
         $("#" + this.getDatepickerId()).datepicker({
             autoclose: true,
             todayHighlight: true,
             startDate: this.state.startDate
-        }).datepicker('update', today);
-
+        }).datepicker('update', this.state.initialDate);
     }
     getFormattedDate(date) {
         var d = date || new Date();

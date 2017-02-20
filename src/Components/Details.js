@@ -133,8 +133,18 @@ const Details = (props) => {
                             </select>
                         </div>
                     </div>
-                    <Datepicker id="start" label="Start Date" handleDateChange={ handleDateChange.bind(this) } />
-                    <Datepicker id="end" label="End Date" startDate={ props.trip.startDate } />
+                    <Datepicker
+                        id="start"
+                        label="Start Date"
+                        initialDate={ props.trip.startDate }
+                        handleDateChange={ handleDateChange.bind(this) }
+                    />
+                    <Datepicker
+                        id="end"
+                        label="End Date"
+                        startDate={ props.trip.startDate }
+                        initialDate={ props.trip.endDate }
+                    />
                     <div className="row">
                         <div className="col-xs-12">
                             <label>Items Needed <button className="btn btn-default btn-sm first" onClick={ (e) => addTodo(props.trip.id, e) }>+</button></label>
