@@ -49,7 +49,6 @@ const Grid = (props) => {
     });
     return (
         <div className="grid-container">
-            <h2>Trips</h2>
             <ul className="list-group">
                 {items}
             </ul>

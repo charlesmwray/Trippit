@@ -29,7 +29,9 @@
     display: inline-block;
     width: initial;
 }
-
+.grid-container {
+    margin-top: 20px;
+}
 .grid-item {
     padding: 0;
     border-color: lightsteelblue;
