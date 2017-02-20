@@ -36,12 +36,13 @@ const Grid = (props) => {
         return (
             <li className={ makeId() } key={ i }>
                 <a className="link" href="#" onClick={(e) => { showDetails(trip.id) }}>
+                    { trip.reminder && <span className="glyphicon glyphicon-bell pull-right"></span> }
                     <h3>{trip.title}</h3>
-                    <div><span className="label">Destination</span>{trip.destination}</div>
-                    <div><span className="label">Duration</span>{getDuration()}</div>
-                    <div><span className="label">Category</span>{trip.category}</div>
-                    <div><span className="label">Items Needed/Complete</span>{getItemsStatus()}</div>
-                    <div><span className="label">Status</span>{trip.planningState} </div>
+                    <div><span className="label">Destination</span>{ trip.destination }</div>
+                    <div><span className="label">Duration</span>{ getDuration() }</div>
+                    <div><span className="label">Category</span>{ trip.category }</div>
+                    <div><span className="label">Items Needed/Complete</span>{ getItemsStatus() }</div>
+                    <div><span className="label">Status</span>{ trip.planningState }</div>
                 </a>
             </li>
         )
