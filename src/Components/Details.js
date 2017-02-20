@@ -68,19 +68,19 @@ const Details = (props) => {
             return i + todo.id
         }
         return (
-            <li key={id()}>
+            <li className="todo-list-item" key={id()}>
                 { todo.title &&
-                    <div>
+                    <div className="content">
                         <input id={ id() } type='checkbox' defaultChecked={todo.complete} onChange={(e) => { handleOnChange( e, 'update' ) } } />
                         <label htmlFor={ id() }>{todo.title}</label>
-                        <button className='btn' onClick={ (e) => { handleOnChange( e, 'delete' ) } }>Delete</button>
+                        <button className='btn btn-xs btn-default pull-right' onClick={ (e) => { handleOnChange( e, 'delete' ) } }>Delete</button>
                     </div>
                 }
                 { !todo.title &&
-                    <div>
+                    <div className="content">
                         <input id={ id() } type="checkbox" defaultChecked={todo.complete} onChange={(e) => { handleOnChange( e, 'update' ) } } />
-                        <input id='todoTitle' type='text' placeholder='Enter title.' />
-                        <button className='btn' onClick={ (e) => { handleOnChange(e, 'save') } }>Save</button>
+                        <input id='todoTitle' type='text' placeholder='Enter title' />
+                        <button className='btn btn-xs btn-default pull-right' onClick={ (e) => { handleOnChange(e, 'save') } }>Save</button>
                     </div>
                 }
             </li>
@@ -138,17 +138,17 @@ const Details = (props) => {
                     <Datepicker id="end" label="End Date" startDate={ props.trip.startDate } />
                     <div className="row">
                         <div className="col-xs-12">
-                            <div>Items Needed <button className="btn first" onClick={ (e) => addTodo(props.trip.id, e) }>+</button></div>
-                            <ul>
+                            <label>Items Needed <button className="btn btn-default btn-sm first" onClick={ (e) => addTodo(props.trip.id, e) }>+</button></label>
+                            <ul className="todo-list">
                                 { todos }
                             </ul>
                         </div>
                     </div>
                 </div>
-                <div className="details-section">
+                <div className="details-section create-reminder">
                     <button
                         type="button"
-                        className="btn"
+                        className="btn btn-info"
                         data-toggle="modal"
                         data-target="#CreateReminder">
                         Create Reminder

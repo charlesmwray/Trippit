@@ -5,6 +5,19 @@ const Grid = (props) => {
         props.showDetails(id);
     }
     const items = props.data.map( (trip, i) => {
+        const makeId = () => {
+            if ( props.selectedTrip ) {
+                console.log( props.selectedTrip.id, trip.id )
+                if ( props.selectedTrip.id === trip.id ) {
+                    return "list-group-item grid-item" + " active";
+                } else {
+                    return "list-group-item grid-item";
+                }
+            } else {
+                return "list-group-item grid-item";
+            }
+
+        }
         const getDuration = () => {
             const startDate = trip.startDate;
             const endDate = trip.endDate;
@@ -21,7 +34,7 @@ const Grid = (props) => {
             return <span>{complete} / {trip.todos.length}</span>
         }
         return (
-            <li className="list-group-item grid-item" key={i}>
+            <li className={ makeId() } key={ i }>
                 <a className="link" href="#" onClick={(e) => { showDetails(trip.id) }}>
                     <h3>{trip.title}</h3>
                     <div><span className="label">Destination</span>{trip.destination}</div>

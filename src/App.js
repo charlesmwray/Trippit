@@ -244,6 +244,7 @@ class App extends Component {
                         <Grid
                             data={ this.state.searchedDb || this.state.db }
                             showDetails={ this.showDetails.bind(this) }
+                            selectedTrip={ this.state.selectedTrip }
                         />
                     </div>
                     <div className="col-xs-12 col-sm-8 details-container">

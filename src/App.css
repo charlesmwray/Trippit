@@ -21,6 +21,7 @@
 }
 .filter-container .filter-item {
     padding: 1rem;
+    margin-bottom: 0;
     flex-grow: 1;
 }
 
@@ -39,28 +40,54 @@
     padding: 1rem;
     text-decoration: none;
 }
-.grid-item .link:hover,
-.grid-item .link:active {
-    background-color: beige;
+.grid-container .grid-item:focus,
+.grid-container .grid-item:active,
+.grid-container .grid-item:hover,
+.grid-container .grid-item.active {
+    background-color: rgba( 0, 0, 0, 0.05 );
 }
-
 .grid-item .label {
     text-align: left;
     display: inline-block;
     color: black;
 }
-
 .grid-item h3 {
     margin-top: 0;
     color: lightcoral;
 }
 
-
 .details-wrapper {
     display: flex;
     flex-direction: column;
-    padding: 1rem;
 }
 .details-section {
     margin: 1rem 0;
+}
+.details-section:first-of-type {
+    margin-top: 0;
+}
+
+.todo-list {
+    padding: 0;
+    margin: 0;
+    height: 100px;
+    overflow: scroll;
+    list-style-type: none;
+    border: 1px solid lightsteelblue;
+}
+.todo-list .todo-list-item {
+    margin: .25rem 0;
+    padding: .5rem;
+    background-color: rgba( 0, 0, 0, 0.05 );
+}
+.todo-list .todo-list-item .content {
+    margin: 0 .5rem;
+    display: flex;
+    align-items: center;
+}
+.todo-list .todo-list-item .content label,
+.todo-list .todo-list-item .content input[type='text'] {
+    margin: 0 1rem;
+    padding: 0 1rem;
+    flex-grow: 1;
 }
