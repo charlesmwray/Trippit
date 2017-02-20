@@ -118,7 +118,7 @@ const Details = (props) => {
     }
     return (
         <div>
-            <h2>Details</h2>
+            <h2 id="details-header">Details</h2>
             <form className="details-wrapper" onSubmit={(e) => saveTrip(e)}>
                 <div className="details-section">
                     { detail(props.trip.title, 'Title', props) }
@@ -159,8 +159,10 @@ const Details = (props) => {
                         !props.trip.new &&
                         <button className="btn btn-danger" onClick={ (e) => deleteTrip(e, props.trip.id) }>Delete</button>
                     }
-                    <button className="btn btn-primary pull-right" type="submit">Save</button>
-                    <button className="btn btn-default pull-right" onClick={ props.cancelNewTrip }>Cancel</button>
+                    <div className="pull-right">
+                        <button className="btn btn-default" onClick={ props.cancelNewTrip }>Cancel</button>
+                        <button className="btn btn-primary" type="submit">Save</button>
+                    </div>
                 </div>
             </form>
             <CreateReminder title={props.trip.title} create={props.createReminder} id={props.trip.id} />

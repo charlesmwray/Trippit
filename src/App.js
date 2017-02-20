@@ -65,6 +65,7 @@ class App extends Component {
         this.setState({
             selectedTrip: details
         });
+        setTimeout( () => { document.getElementById('details-header').scrollIntoView(); }, 100);
     }
     createNewTrip() {
         this.showDetails();
@@ -261,7 +262,7 @@ class App extends Component {
                                 createReminder={ this.createReminder.bind(this) }
                             />
                         }
-                        { !this.state.selectedTrip && <h2>&#8678; Select a trip</h2> }
+                        { !this.state.selectedTrip && <h2><span className="hidden-xs">&#8678;</span> Select a trip</h2> }
                     </div>
                 </div>
             </div>
