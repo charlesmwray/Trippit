@@ -24,7 +24,7 @@ const CreateReminder = (props) => {
                         </div>
                         <div className="modal-footer">
                             <button type="button" className="btn" data-dismiss="modal">Close</button>
-                            <button type="button" className="btn" type="submit">Save changes</button>
+                            <button className="btn" type="submit">Save changes</button>
                         </div>
                     </div>
                 </form>

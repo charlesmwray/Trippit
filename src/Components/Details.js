@@ -6,7 +6,6 @@ import CreateReminder from './CreateReminder';
 const Details = (props) => {
     const saveTrip = (e) => {
         e.preventDefault();
-        console.log();
 
         const saveData = {
             id: props.trip.id ? props.trip.id : Math.floor(100000 + Math.random() * 900000).toString(),
@@ -37,11 +36,11 @@ const Details = (props) => {
                 count++;
             }
         }
-        if (count == props.trip.todos.length) {
+        if (count === props.trip.todos.length) {
             props.setPlanningState(id, 'Ready');
         } else if (count < props.trip.todos.length && count > 0) {
             props.setPlanningState(id, 'In Progress');
-        } else if (count == 0) {
+        } else if (count === 0) {
             props.setPlanningState(id, 'Created');
         }
     }

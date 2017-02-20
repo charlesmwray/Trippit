@@ -28,15 +28,13 @@ class App extends Component {
         });
     }
     componentDidMount() {
-        const reminderTimes = this.state.db.filter( (trip) => {
-            console.log(trip.reminder);
-            return trip.reminder
-        });
-        const checkForReminder = () => {
-            var date = new Date('yyyy/');
-            console.log()
-        }
-        setInterval(checkForReminder, 1000);
+        // const reminderTimes = this.state.db.filter( (trip) => {
+        //     return trip.reminder
+        // });
+        // const checkForReminder = () => {
+        //     var date = new Date('yyyy/');
+        // }
+        // setInterval(checkForReminder, 1000);
     }
     resetData() {
         localStorage.setItem('trips', null);
@@ -65,7 +63,12 @@ class App extends Component {
         this.setState({
             selectedTrip: details
         });
-        setTimeout( () => { document.getElementById('details-header').scrollIntoView(); }, 100);
+        setTimeout( () => {
+            const windowHeight= document.documentElement.clientHeight|| window.innerHeight;
+            if ( document.getElementById('details-header').getBoundingClientRect().top > windowHeight / 2 ) {
+                document.getElementById('details-header').scrollIntoView();
+            }
+        }, 100);
     }
     createNewTrip() {
         this.showDetails();
@@ -116,11 +119,12 @@ class App extends Component {
                                 db[i].todos[j].complete = value;
                                 break;
                             case 'delete':
-                                console.log(j)
                                 db[i].todos.splice(j,1);
                                 break;
                             case 'save':
                                 db[i].todos[j].title = value;
+                                break;
+                            default:
                                 break;
                         }
                     }
@@ -191,7 +195,7 @@ class App extends Component {
                         arr[i].hasOwnProperty(key) &&
                         arr[i][key].toString().toLowerCase().indexOf(searchTerm) > -1
                     ) {
-                        results.indexOf( arr[i].id) == -1 && results.push( arr[i].id );
+                        results.indexOf( arr[i].id) === -1 && results.push( arr[i].id );
                     }
                 }
             }
@@ -216,7 +220,6 @@ class App extends Component {
         const filteredDb = db.filter( function( trip ) {
             return trip.category === filter;
         });
-        console.log( filteredDb );
         this.setState({
             searchedDb: filteredDb
         });

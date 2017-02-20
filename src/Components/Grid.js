@@ -6,10 +6,10 @@ const Grid = (props) => {
     }
     const items = props.data.map( (trip, i) => {
         const makeId = () => {
+            // TODO: This can be redone.
             if ( props.selectedTrip ) {
-                console.log( props.selectedTrip.id, trip.id )
                 if ( props.selectedTrip.id === trip.id ) {
-                    return "list-group-item grid-item" + " active";
+                    return "list-group-item grid-item active";
                 } else {
                     return "list-group-item grid-item";
                 }
