@@ -8,16 +8,19 @@ class Datepicker extends Component {
         this.state = {
             id: props.id,
             label: props.label,
+            // If the calendar must be limited to dates in the past
             startDate: props.startDate || null,
+            // Iitial selected date or today
             initialDate: props.initialDate || this.getFormattedDate()
         }
     }
     componentDidMount() {
-        $("#" + this.getDatepickerId()).datepicker({
+        // instantiates datepicker
+        $( "#" + this.getDatepickerId() ).datepicker({
             autoclose: true,
             todayHighlight: true,
             startDate: this.state.startDate
-        }).datepicker('update', this.state.initialDate);
+        }).datepicker( 'update', this.state.initialDate );
     }
     getFormattedDate(date) {
         var d = date || new Date();

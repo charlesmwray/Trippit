@@ -1,3 +1,4 @@
+/*eslint no-undef: 0*/
 import React, { Component } from 'react';
 import './App.css';
 import Moment from 'moment';
@@ -7,8 +8,11 @@ import Details from './Components/Details';
 import Filter from './Components/Filter';
 import Reminder from './Components/Reminder';
 
+// Mock db response
 import dbResponse from './data/dbResponse';
+// Saves to localStorage
 import setDb from './data/setDb';
+// Gets data from localStorage
 import getDb from './data/getDb';
 
 class App extends Component {
@@ -30,10 +34,14 @@ class App extends Component {
         });
     }
     componentDidMount() {
+
+        // Creates array of trips with reminders.
         const reminderTimes = this.state.db.filter( (trip) => {
             return  trip.reminder
         });
 
+        // Checks to see if trips with reminders are
+        // within a minute of the current time
         const checkForReminder = () => {
             reminderTimes.forEach( (trip) => {
                 if ( !this.state.reminder && Moment( trip.reminder ).isSame( Moment(), 'minute') ) {
@@ -44,7 +52,8 @@ class App extends Component {
             })
         }
 
-        setInterval(checkForReminder, 1000);
+        // Runs the check at interval (currently at once a minute)
+        setInterval(checkForReminder, 1000 * 60);
     }
     resetData() {
         // For development only. Click on header to
@@ -55,10 +64,12 @@ class App extends Component {
     showDetails(id) {
         var details = '';
         if (id) {
+            // Filters db to selected trip
             details = this.state.db.filter( ( selectedTrip ) => {
                 return selectedTrip.id === id;
             })[0];
         } else {
+            // If no id, it's a new trip
             details = {
                 new: true,
                 title: '',
@@ -72,13 +83,16 @@ class App extends Component {
             }
         }
 
+        // Sets selected trip to Component State
         this.setState({
             selectedTrip: details
         });
+
+        // Scrolls down to details if in mobile view on trip selection.
         setTimeout( () => {
             const windowHeight= document.documentElement.clientHeight|| window.innerHeight;
             if ( document.getElementById('details-header').getBoundingClientRect().top > windowHeight / 2 ) {
-                document.getElementById('details-header').scrollIntoView();
+                $('body').animate({ scrollTop: $('#details-header').offset().top}, 500);
             }
         }, 100);
     }
@@ -93,6 +107,8 @@ class App extends Component {
     saveTrip(data) {
         var db = this.state.db;
         var newTrip = false;
+
+        // If it's an existing trip, update array of objects
         for(var i = 0 ; i < db.length; i++){
             if(db[i].hasOwnProperty("id") && db[i].id === data.id) {
                 db[i] = data;
@@ -100,8 +116,14 @@ class App extends Component {
                 break;
             }
         }
+
+        // If it's a new trip add it to the db
         !newTrip && db.push(data);
+
+        // Saves to localStorage
         setDb(db);
+
+        // Updates Component state
         this.setState({
             db:db
         })
@@ -114,7 +136,9 @@ class App extends Component {
                 break;
             }
         }
+
         setDb(db);
+
         this.setState({
             db:db,
             selectedTrip:null
@@ -167,6 +191,7 @@ class App extends Component {
         });
     }
     setPlanningState(id, state) {
+        // Updates planning state of trip on update from details page
         var db = this.state.db;
         for(var i = 0 ; i < db.length; i++){
             if(db[i].hasOwnProperty("id") && db[i].id === id) {
@@ -197,6 +222,7 @@ class App extends Component {
     }
     closeReminder() {
         var db = this.state.db;
+        // Clears reminder on close of modal
         for(var i = 0 ; i < db.length; i++){
             if(db[i].hasOwnProperty("id") && db[i].id === this.state.reminder.id) {
                 db[i].reminder = false;
@@ -211,6 +237,7 @@ class App extends Component {
     }
     search(term) {
         var db = this.state.db;
+        // Gets IDs that match search
         function search(arr, searchTerm){
             var results = [], i, key;
 
@@ -228,6 +255,7 @@ class App extends Component {
             return results;
         };
         const results = search(db, term.toLowerCase());
+        // Filters db on IDs returned from search() into new array
         var searchedDb = db.filter(function(trip, i) {
             return results.indexOf(trip.id) !==  -1;
         });
@@ -252,15 +280,15 @@ class App extends Component {
     render() {
         return (
             <div className="container">
+                { this.state.reminder &&
+                    <Reminder
+                        data={ this.state.reminder }
+                        close={ this.closeReminder.bind(this) }
+                    />
+                }
                 <div className="row">
                     <div className="col-xs-12">
                         <h1 className="site-title" onClick={ this.resetData }>Trippit</h1>
-                        { this.state.reminder &&
-                            <Reminder
-                                data={ this.state.reminder }
-                                close={ this.closeReminder.bind(this) }
-                            />
-                        }
                     </div>
                 </div>
                 <div className="row">

@@ -5,8 +5,8 @@ const Grid = (props) => {
         props.showDetails(id);
     }
     const items = props.data.map( (trip, i) => {
-        const makeId = () => {
-            // TODO: This can be redone.
+        const makeGridClasses = () => {
+            // TODO: This should be refactored.
             if ( props.selectedTrip ) {
                 if ( props.selectedTrip.id === trip.id ) {
                     return "list-group-item grid-item active";
@@ -16,15 +16,16 @@ const Grid = (props) => {
             } else {
                 return "list-group-item grid-item";
             }
-
         }
         const getDuration = () => {
+            // Parses dates to get duration of trip
             const startDate = trip.startDate;
             const endDate = trip.endDate;
             const duration = Math.abs( new Date(startDate) - new Date(endDate) ) / ( 1000 * 3600 * 24 );
             return  <span>{duration} days</span>;
         }
         const getItemsStatus = () => {
+            // Parses todos to get number completed and total
             var complete = 0;
             trip.todos.forEach( (todo) => {
                 if (todo.complete) {
@@ -34,7 +35,7 @@ const Grid = (props) => {
             return <span>{complete} / {trip.todos.length}</span>
         }
         return (
-            <li className={ makeId() } key={ i }>
+            <li className={ makeGridClasses() } key={ i }>
                 <a className="link" href="#" onClick={(e) => { showDetails(trip.id) }}>
                     { trip.reminder && <span className="glyphicon glyphicon-bell pull-right"></span> }
                     <h3>{trip.title}</h3>

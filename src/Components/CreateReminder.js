@@ -5,6 +5,7 @@ import Timepicker from './Timepicker';
 
 const CreateReminder = (props) => {
     const handleSubmit = (e, id) => {
+        // Creates reminder and closes modal
         e.preventDefault();
         props.create(e, id);
         $('#CreateReminder').modal('hide');

@@ -26,9 +26,12 @@ class Reminder extends Component {
                             <h4 className="modal-title">Reminder for your trip: {this.state.title} on {this.state.date}</h4>
                         </div>
                         <div className="modal-footer">
+                            <button className="btn btn-danger">
+                                Snooze
+                            </button>
                             <button
                                 type="button"
-                                className="btn"
+                                className="btn btn-default"
                                 data-dismiss="modal"
                                 onClick={ () => { this.state.close() } }
                             >

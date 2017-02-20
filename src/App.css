@@ -1,6 +1,7 @@
 .container {
     margin: 1rem auto 3rem auto;
 }
+/* Global styles */
 .btn + .btn {
     margin-left: 1rem;
 }
@@ -29,6 +30,7 @@
     display: inline-block;
     width: initial;
 }
+
 .grid-container {
     margin-top: 20px;
 }
@@ -36,7 +38,6 @@
     padding: 0;
     border-color: lightsteelblue;
 }
-
 .grid-item .link {
     display: block;
     padding: 1rem;

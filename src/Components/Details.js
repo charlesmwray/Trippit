@@ -8,6 +8,7 @@ const Details = (props) => {
         e.preventDefault();
 
         const saveData = {
+            // if it's a new trip, generate random ID
             id: props.trip.id ? props.trip.id : Math.floor(100000 + Math.random() * 900000).toString(),
             title: e.target.Title.value,
             destination: e.target.City.value,
@@ -18,6 +19,7 @@ const Details = (props) => {
             todos: props.trip.newTrip ? [''] : props.trip.todos,
             planningState: props.trip.newTrip ? 'Created' : props.trip.planningState
         }
+
         props.saveTrip(saveData);
     }
     const deleteTrip = (e, id) => {
@@ -91,6 +93,7 @@ const Details = (props) => {
     }
     const detail = (detail, label, props, inputType) => {
         const parseInputType = () => {
+            // Creates input or textarea
             if ( inputType === 'textarea' ) {
                 return <textarea
                         id={ label }
@@ -111,9 +114,6 @@ const Details = (props) => {
                 </div>
             </div>
         )
-    }
-    const handleDateChange = (e) => {
-
     }
     return (
         <div>
