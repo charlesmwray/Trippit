@@ -53,7 +53,7 @@ class App extends Component {
         }
 
         // Runs the check at interval (currently at once a minute)
-        setInterval(checkForReminder, 1000 * 60);
+        setInterval(checkForReminder, 1000);
     }
     resetData() {
         // For development only. Click on header to
@@ -205,14 +205,20 @@ class App extends Component {
             db:db
         });
     }
-    createReminder(e, id) {
+    createReminder(e, id, type) {
         var db = this.state.db;
         for(var i = 0 ; i < db.length; i++){
             if(db[i].hasOwnProperty("id") && db[i].id === id) {
-                const time = e.target.CreateReminderTimepicker.value;
-                const date = e.target.CreateReminderInputDatepicker.value;
 
-                db[i].reminder = Moment( date + ' ' + time);
+                if (type === 'update') {
+                    var d = db[i].reminder;
+                    db[i].reminder = d.add(1, 'minutes');
+                } else {
+                    const time = e.target.CreateReminderTimepicker.value;
+                    const date = e.target.CreateReminderInputDatepicker.value;
+                    db[i].reminder = Moment( date + ' ' + time);
+                }
+
             }
         }
         setDb(db);
@@ -284,6 +290,7 @@ class App extends Component {
                     <Reminder
                         data={ this.state.reminder }
                         close={ this.closeReminder.bind(this) }
+                        snooze={ this.createReminder.bind(this) }
                     />
                 }
                 <div className="row">

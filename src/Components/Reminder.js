@@ -8,7 +8,9 @@ class Reminder extends Component {
         this.state = {
             title: props.data.title,
             date: props.data.date,
-            close: props.close
+            id: props.data.id,
+            close: props.close,
+            snooze: props.snooze
         }
     }
     componentDidMount() {
@@ -26,8 +28,12 @@ class Reminder extends Component {
                             <h4 className="modal-title">Reminder for your trip: {this.state.title} on {this.state.date}</h4>
                         </div>
                         <div className="modal-footer">
-                            <button className="btn btn-danger">
-                                Snooze
+                            <button
+                                className="btn btn-danger"
+                                data-dismiss="modal"
+                                onClick={ () => { this.state.snooze(null, this.state.id, 'update' ) } }
+                            >
+                                Snooze 1 minute.
                             </button>
                             <button
                                 type="button"
