@@ -137,7 +137,6 @@ const Details = (props) => {
                         id="start"
                         label="Start Date"
                         initialDate={ props.trip.startDate }
-                        handleDateChange={ handleDateChange.bind(this) }
                     />
                     <Datepicker
                         id="end"
