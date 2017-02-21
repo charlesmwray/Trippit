@@ -16,20 +16,37 @@
 
 .filter-container {
     display: flex;
-    align-items: stretch;
-    border: 1px solid lightsteelblue;
-    border-radius: 4px;
+    flex-direction: column;
 }
-.filter-container .filter-item {
-    padding: 1rem;
-    margin-bottom: 0;
-    flex-grow: 1;
+.filter-section {
+    margin: .25rem;
 }
-
-.filter-container .filter-item .search {
+.filter-section .search,
+.filter-section .filter {
     display: inline-block;
+}
+.filter-section .search {
+    width: 45%;
+}
+.filter-section .filter {
+    margin-left: 1rem;
     width: initial;
 }
+@media (min-width: 321px) {
+    .filter-container {
+        flex-direction: row;
+    }
+    .filter-section {
+        margin: 0 1rem;
+    }
+    .filter-section:first-of-type {
+        margin-left: 1rem;
+    }
+    .filter-section .search {
+        width: initial;
+    }
+}
+
 
 .grid-container {
     margin-top: 20px;
