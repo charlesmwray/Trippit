@@ -24,8 +24,8 @@ const CreateReminder = (props) => {
                             <Datepicker id="CreateReminder" label="Date" />
                         </div>
                         <div className="modal-footer">
-                            <button type="button" className="btn" data-dismiss="modal">Close</button>
-                            <button className="btn" type="submit">Save changes</button>
+                            <button type="button" className="btn btn-default" data-dismiss="modal">Close</button>
+                            <button className="btn btn-success" type="submit">Save changes</button>
                         </div>
                     </div>
                 </form>

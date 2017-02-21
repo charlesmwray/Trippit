@@ -117,7 +117,15 @@ const Details = (props) => {
     }
     return (
         <div>
-            <h2 id="details-header">Details</h2>
+            <h2 id="details-header">Details
+                <button
+                    type="button"
+                    className="btn btn-info pull-right"
+                    data-toggle="modal"
+                    data-target="#CreateReminder">
+                    Create Reminder
+                </button>
+            </h2>
             <form className="details-wrapper" onSubmit={(e) => saveTrip(e)}>
                 <div className="details-section">
                     { detail(props.trip.title, 'Title', props) }
@@ -154,13 +162,7 @@ const Details = (props) => {
                     </div>
                 </div>
                 <div className="details-section create-reminder">
-                    <button
-                        type="button"
-                        className="btn btn-info"
-                        data-toggle="modal"
-                        data-target="#CreateReminder">
-                        Create Reminder
-                    </button>
+
                 </div>
                 <div className="button-section">
                     {
@@ -169,7 +171,7 @@ const Details = (props) => {
                     }
                     <div className="pull-right">
                         <button className="btn btn-default" onClick={ props.cancelNewTrip }>Cancel</button>
-                        <button className="btn btn-primary" type="submit">Save</button>
+                        <button className="btn btn-success" type="submit">Save</button>
                     </div>
                 </div>
             </form>

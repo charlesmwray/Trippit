@@ -69,6 +69,10 @@
 .details-section:first-of-type {
     margin-top: 0;
 }
+.details-wrapper .button-section {
+    padding: 1rem;
+    border: 1px solid lightsteelblue;
+}
 
 .todo-list {
     padding: 0;

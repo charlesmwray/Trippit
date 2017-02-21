@@ -43,17 +43,20 @@ class App extends Component {
         // Checks to see if trips with reminders are
         // within a minute of the current time
         const checkForReminder = () => {
-            reminderTimes.forEach( (trip) => {
-                if ( !this.state.reminder && Moment( trip.reminder ).isSame( Moment(), 'minute') ) {
-                    this.setState({
-                        reminder: { title: trip.title, date: trip.startDate, id: trip.id }
-                    });
-                }
-            })
+            if ( !this.state.reminder ) {
+                reminderTimes.forEach( (trip) => {
+                    if ( Moment( trip.reminder ).isSame( Moment(), 'minute') ) {
+                        this.setState({
+                            reminder: { title: trip.title, date: trip.startDate, id: trip.id }
+                        });
+                    }
+                });
+            }
         }
+        checkForReminder();
 
         // Runs the check at interval (currently at once a minute)
-        setInterval(checkForReminder, 1000);
+        setInterval(checkForReminder, 5000);
     }
     resetData() {
         // For development only. Click on header to
@@ -211,8 +214,12 @@ class App extends Component {
             if(db[i].hasOwnProperty("id") && db[i].id === id) {
 
                 if (type === 'update') {
-                    var d = db[i].reminder;
+                    var d = Moment(db[i].reminder);
                     db[i].reminder = d.add(1, 'minutes');
+                    this.setState({
+                        isReminderActive: false,
+                        reminder: null,
+                    });
                 } else {
                     const time = e.target.CreateReminderTimepicker.value;
                     const date = e.target.CreateReminderInputDatepicker.value;
