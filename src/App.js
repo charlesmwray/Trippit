@@ -221,7 +221,7 @@ class App extends Component {
                 } else {
                     const time = e.target.CreateReminderTimepicker.value;
                     const date = e.target.CreateReminderInputDatepicker.value;
-                    db[i].reminder = Moment( date + ' ' + time);
+                    db[i].reminder = Moment( date + ' ' + time ).toString();
                 }
 
             }
