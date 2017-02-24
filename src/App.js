@@ -55,7 +55,7 @@ class App extends Component {
         }
         checkForReminder();
 
-        // Runs the check at interval (currently at once a minute)
+        // Runs the check at interval (currently at once a 5 seconds)
         setInterval(checkForReminder, 5000);
     }
     resetData() {
@@ -76,9 +76,7 @@ class App extends Component {
             details = {
                 new: true,
                 title: '',
-                destination: {
-                    city: ''
-                },
+                destination: '',
                 category: '',
                 startDate: '',
                 endDate: '',
